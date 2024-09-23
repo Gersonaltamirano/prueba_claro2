@@ -1,0 +1,24 @@
+﻿@{
+    ViewData["Title"] = "Detectar Palíndromos";
+}
+
+<h2>Detectar Palíndromos</h2>
+
+<form method="post" asp-action="ContarPalindromos">
+    <div class="form-group">
+        <label for="texto">Ingrese el texto:</label>
+        <input type="text" id="texto" name="texto" class="form-control" required />
+    </div>
+    <button type="submit" class="btn btn-primary">Contar Palíndromos</button>
+</form>
+
+@if (ViewBag.Palindromos != null)
+{
+    <h3>Palíndromos encontrados:</h3>
+    <ul>
+        @foreach (var palindromo in ViewBag.Palindromos)
+        {
+            <li>@palindromo</li>
+        }
+    </ul>
+}

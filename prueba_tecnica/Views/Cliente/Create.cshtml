@@ -1,0 +1,49 @@
+﻿@model prueba_tecnica.Models.Cliente
+
+@{
+    ViewData["Title"] = "Crear Cliente";
+}
+
+<h2>Crear Cliente</h2>
+
+<form id="clienteForm">
+    <div class="form-group">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label for="apellido">Apellido:</label>
+        <input type="text" id="apellido" name="apellido" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label for="fechaNacimiento">Fecha de Nacimiento:</label>
+        <input type="date" id="fechaNacimiento" name="fechaNacimiento" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Enviar</button>
+</form>
+
+<script>
+    document.getElementById('clienteForm').addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        const cliente = {
+            nombre: document.getElementById('nombre').value,
+            apellido: document.getElementById('apellido').value,
+            fechaNacimiento: document.getElementById('fechaNacimiento').value
+        };
+
+        fetch('/api/Clientes', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(cliente)
+        })
+        .then(response => response.json())
+        .then(data => alert('Cliente creado con éxito'))
+        .catch(error => console.error('Error:', error));
+    });
+</script>

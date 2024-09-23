@@ -3,23 +3,21 @@ using prueba_tecnica.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
-//Agregar el contexto de la base de datos
+// Agregar el contexto de la base de datos
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
 );
 
-// Add services to the container.
+// Cambiar a AddControllersWithViews para permitir vistas y controladores
+builder.Services.AddControllersWithViews();
 
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+// Swagger
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-
-
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Middleware
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -27,9 +25,15 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseStaticFiles(); // Sirve archivos estáticos como CSS, imágenes, etc.
 app.UseAuthorization();
 
-app.MapControllers();
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");  // Ruta para controladores con vistas
+
+app.MapControllerRoute(
+    name: "palindromo",
+    pattern: "{controller=Palindromo}/{action=Index}/{id?}"); // Ruta para el controlador Palindromo
 
 app.Run();

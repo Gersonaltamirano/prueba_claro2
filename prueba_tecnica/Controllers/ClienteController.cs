@@ -2,7 +2,7 @@
 using prueba_tecnica.Data;
 using prueba_tecnica.Models;
 
-namespace prueba_tecnica.Controllers
+namespace prueba_tecnica.Controllers 
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -56,5 +56,15 @@ namespace prueba_tecnica.Controllers
                 Edad = edad
             });
         }
+
+        public class ClienteController : Controller
+        {
+            public IActionResult Create()
+            {
+                return View();
+            }
+        }
+
+
     }
 }
