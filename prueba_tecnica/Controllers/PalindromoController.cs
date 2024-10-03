@@ -13,11 +13,13 @@ namespace prueba_tecnica.Controllers
 
         // POST: Palindromo/ContarPalindromos
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult ContarPalindromos(string texto)
         {
             var palindromos = ObtenerPalindromos(texto);
+            ViewBag.TextoOriginal = texto; 
             ViewBag.Palindromos = palindromos;
-            return View("Index");
+            return View("MostrarPalindromos");
         }
 
         private List<string> ObtenerPalindromos(string texto)

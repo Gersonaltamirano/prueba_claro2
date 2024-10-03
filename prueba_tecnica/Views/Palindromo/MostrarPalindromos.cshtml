@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewData["Title"] = "MostrarPalindromos";
+}
+
+<a href="index">REGRESAR</a>
+
+<h1>Mostrar Palindromos de la palabra "@ViewBag.TextoOriginal"</h1>
+
+
+
+@if (ViewBag.Palindromos != null)
+{
+    <h3>Palíndromos encontrados:  @ViewBag.Palindromos.Count</h3>
+    <ul>
+        @foreach (var palindromo in ViewBag.Palindromos)
+        {
+            <li>@palindromo</li>
+        }
+    </ul>
+}
+

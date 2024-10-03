@@ -26,14 +26,12 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles(); // Sirve archivos estáticos como CSS, imágenes, etc.
+app.UseRouting();
+
 app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");  // Ruta para controladores con vistas
-
-app.MapControllerRoute(
-    name: "palindromo",
-    pattern: "{controller=Palindromo}/{action=Index}/{id?}"); // Ruta para el controlador Palindromo
 
 app.Run();
